@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.dropdown-toggle{
+  color: white !important;
+}
+th,label{
+  text-transform: capitalize;
+}
+
+

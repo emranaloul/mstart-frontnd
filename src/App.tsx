@@ -26,18 +26,15 @@ function App({ getMyProfile }: PropTypes) {
     const token = load('token')
     if (user?.id && !loggedIn) {
       navigate('/signin')
-    } 
+    }
     else if (expired_session) {
       navigate('/signin')
       dispatch(resetSession())
     }
     else if (!user?.id && !loggedIn && !token) {
-      console.log('here');
       navigate('/signin')
     }
     else if (user?.id && loggedIn && ['/signin', '/signup'].includes(location.pathname)) {
-      console.log('right here');
-
       navigate('/')
     }
     else if (token) {

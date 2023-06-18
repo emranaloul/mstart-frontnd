@@ -15,7 +15,7 @@ const DeleteModal = ({show, onHide, onDelete, item}:PropTypes) => {
          <Modal show={show} centered>
                 <Modal.Header>
                     <Modal.Title>
-                        Delete Deal
+                        Delete 
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

@@ -39,14 +39,14 @@ const MyProfile = ({ updateImageHandler,updateUserHandler,getMyProfile }: PropTy
     return (
         <Container>
             <Row className='justify-content-center py-2 g-2 align-items-center border border-info my-5 bg-light rounded'>
-                <Col xs={4} >
+                <Col xs={12} sm={12} md={5} lg={4} >
                     <Image src={user.image ?? defaultImage} rounded style={{ maxWidth: '100%', maxHeight: '20rem' }} className='my-4' />
-                    <Form.Group controlId="formFileSm" className="mb-3">
+                    <Form.Group className="mb-3">
                         <Form.Label htmlFor='avatar' className='btn btn-primary'>Upload Avatar</Form.Label>
                         <Form.Control hidden type="file" size="sm" name='avatar' id='avatar' onChange={uploadHandler} />
                     </Form.Group>
                 </Col>
-                <Col xs={5} className='border border-info p-5 rounded' style={{height: '100%'}}>
+                <Col xs={12} lg={5} md={7} sm={12}  className='border border-info p-5 rounded' style={{height: '100%'}}>
                     <Form onSubmit={submitHandler}>
                         <Form.Group>
                             <Form.Label htmlFor='name' >
@@ -100,7 +100,7 @@ const MyProfile = ({ updateImageHandler,updateUserHandler,getMyProfile }: PropTy
                         </Form.Group>
                     </Form>
                 </Col>
-                <Col xs={3} >
+                <Col lg={3} sm='auto' md='auto'>
                     <ClaimedDealsDetails />
                 </Col>
             </Row>

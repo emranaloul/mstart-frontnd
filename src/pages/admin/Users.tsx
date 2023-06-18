@@ -65,7 +65,7 @@ export const Users = ({ getUsers, updateUser }: PropTypes) => {
     { header: 'role', field: 'role' },
     { header: 'gender', field: 'gender' },
     { header: 'status', field: 'status' },
-    { header: 'last login', field: 'last_login', body: (d: UserType) => d.last_login ? new Date(d.last_login).toLocaleString() : '-' },
+    { header: 'last login', field: 'last_login', body: (d: UserType) => d.last_login_datetime_utc ? new Date(d.last_login_datetime_utc).toLocaleString() : '-' },
     { header: 'actions', field: 'action', body: (d: UserType) => <Actions data={d} updateUser={updateUser} /> }
   ]
   const searchHandler = (e:React.FormEvent<HTMLFormElement>) =>{
@@ -88,7 +88,7 @@ export const Users = ({ getUsers, updateUser }: PropTypes) => {
             </Col>
           </Row>
         </Col>
-        <Col xs={6} className='border p-5 border-light rounded bg-light'>
+        {/* <Col xs={6} className='border p-5 border-light rounded bg-light'>
           <Form onSubmit={searchHandler}>
             <Form.Group>
 
@@ -112,7 +112,7 @@ export const Users = ({ getUsers, updateUser }: PropTypes) => {
               reset filter
             </Tooltip>
           </Form>
-        </Col>
+        </Col> */}
         <Col xs={12}>
           <TableData updateParams={setParams} onSelect={e => setSelected(e)} checkbox count={count} limit={params.limit} data={data} columns={columns} onPageChange={getUsers} />
         </Col>

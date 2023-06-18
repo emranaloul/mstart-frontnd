@@ -16,7 +16,7 @@ class Claims extends ServiceAPI {
             return error
         }
     }
-    async getClaims(data : ParamsType ){
+    async getClaims(data : ParamsType & {user_id?: string} ){
         try {
             return await this.get(this.path, data)
         } catch (error) {
@@ -30,6 +30,7 @@ class Claims extends ServiceAPI {
             return error
         }
     }
+   
 }
 
 export default new Claims()

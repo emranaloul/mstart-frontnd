@@ -83,13 +83,13 @@ export const getMyProfile = () => async (dispatch: AppDispatch) => {
 export const updateImageHandler = (payload: FormData) => async (dispatch: AppDispatch, state: () => RootState) => {
     try {
         const { status, message, data } = await Auth.updateImage(payload)
-        if(status === 200){
-            const {user} = state().auth
-            let _user = {...user}
+        if (status === 200) {
+            const { user } = state().auth
+            let _user = { ...user }
             _user.image = data.image
-            dispatch(addData({user: _user}))
-            dispatch(setToast({type:'update', text: message}))
-        } else dispatch(setToast({type: 'error', text: message}))
+            dispatch(addData({ user: _user }))
+            dispatch(setToast({ type: 'update', text: message }))
+        } else dispatch(setToast({ type: 'error', text: message }))
     } catch (error) {
         if (error instanceof Error) {
             dispatch(setToast({ type: 'error', text: error.message }))
@@ -97,19 +97,34 @@ export const updateImageHandler = (payload: FormData) => async (dispatch: AppDis
     }
 }
 
-export const updateUserHandler = (payload: UserType) =>async (dispatch:AppDispatch, state : ()=> RootState) => {
-        try {
-            const {message, status, data } = await Users.updateUser(payload)
-            if(status=== 200){
-                const {user} = state().auth
-                dispatch(addData({user: {...user,...data}}))
-                dispatch(setToast({type: 'update', text: message}))
-            } else dispatch(setToast({type: 'error', text: message}))
-        } catch (error) {
-            if (error instanceof Error) {
-                dispatch(setToast({ type: 'error', text: error.message }))
-            }
+export const updateUserHandler = (payload: UserType) => async (dispatch: AppDispatch, state: () => RootState) => {
+    try {
+        const { message, status, data } = await Users.updateUser(payload)
+        if (status === 200) {
+            const { user } = state().auth
+            dispatch(addData({ user: { ...user, ...data } }))
+            dispatch(setToast({ type: 'update', text: message }))
+        } else dispatch(setToast({ type: 'error', text: message }))
+    } catch (error) {
+        if (error instanceof Error) {
+            dispatch(setToast({ type: 'error', text: error.message }))
         }
+    }
+}
+
+export const logoutHandler = () => async (dispatch: AppDispatch) => {
+    try {
+        const { data, status, message } = await Auth.logout()
+        if(status === 200){
+            remove('token')
+            dispatch(addData(initialState))
+            dispatch(setToast({type:'create', text: message}))
+        } else dispatch(setToast({type: 'error', text: message}))
+    } catch (error) {
+        if (error instanceof Error) {
+            dispatch(setToast({ type: 'error', text: error.message }))
+        }
+    }
 }
 
 export const { addData, resetSession } = auth.actions

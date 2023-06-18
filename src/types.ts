@@ -42,5 +42,5 @@ export type ClaimType = {
     deal_id: string
     amount: number
     currency: string
-    Server_DateTime?: string | null
+    server_datetime?: string | null
 }

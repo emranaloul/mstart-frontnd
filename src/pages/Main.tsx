@@ -6,7 +6,7 @@ import { RootState } from '../store';
 import Pagination from '../components/Pagination';
 import { createClaimHandler } from '../store/claims';
 import { ClaimType, DealType } from '../types';
-import { Check } from 'react-bootstrap-icons';
+import { Check, XCircle } from 'react-bootstrap-icons';
 
 type PropTypes = {
     getDealsHandler: (d: {}) => void
@@ -50,13 +50,14 @@ const Main = ({ getDealsHandler, createClaimHandler }: PropTypes) => {
                                         </Card.Body>
                                         <Card.Footer>
 
-                                            <Button variant='primary' onClick={() => claimHandler(d)} disabled={d.status === 'claimed'}>
-                                                {d.status === 'claimed' ?
+                                            <Button variant={(d.status && ['claimed','active'].includes(d.status.toLocaleLowerCase())) ? 'primary':'danger'} onClick={() => claimHandler(d)} disabled={d.status?.toLocaleLowerCase() !== 'active'}>
+                                                {d.status === 'claimed' &&
                                                     <>
                                                         <Check size={20} />
                                                         Claimed
-                                                    </> :
-                                                    'Claim'}
+                                                    </>}
+                                                {d.status?.toLocaleLowerCase() === 'active' ? 'Claim Now!' : ''}
+                                                {d.status && !['claimed','active'].includes(d.status.toLocaleLowerCase()) && <><XCircle/> {d.status} </>}
                                             </Button>
                                         </Card.Footer>
                                     </Card>

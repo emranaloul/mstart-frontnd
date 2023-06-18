@@ -10,13 +10,18 @@ import { getDealsHandler } from '../store/deals';
 import Main from './Main';
 import ClaimedDealsDetails from './ClaimedDealsDetails';
 import MyProfile from './user/MyProfile';
+import { logoutHandler } from '../store/auth';
 
 const style: React.CSSProperties = {
   color: 'white'
 }
-export const Home = () => {
-  const { user } = useSelector((state: RootState) => state.auth)
 
+type PropTypes = {
+  logoutHandler : ()=> void
+}
+const Home = ({logoutHandler}:PropTypes) => {
+  const { user } = useSelector((state: RootState) => state.auth)
+  
   return (
     <>
       <Navbar bg="primary" expand="lg">
@@ -30,9 +35,8 @@ export const Home = () => {
               {user.role === 'admin' && <Link to={'/claimed'} className='nav-link' style={style}>Claimed Deals</Link>}
               <NavDropdown title={`Hello ${user.name}`} id="basic-nav-dropdown">
                 <Link className='dropdown-item' to="/me">My Profile</Link>
-                <Link className='dropdown-item' to="/claimed/details">Claimed Deals</Link>
                 <NavDropdown.Divider />
-                <Button className='dropdown-item' >
+                <Button className='dropdown-item' onClick={logoutHandler}>
                   Logout
                 </Button>
               </NavDropdown>
@@ -48,12 +52,11 @@ export const Home = () => {
         <Route path='/claimed/details' element={<ClaimedDealsDetails />} />
         <Route path='/me' element={<MyProfile />} />
       </Routes>
-      {/* <Navigate to={'/'}/> */}
     </>
   )
 }
 
-const mapDispatchToProps = { getDealsHandler }
+const mapDispatchToProps = { getDealsHandler,logoutHandler }
 
 
 

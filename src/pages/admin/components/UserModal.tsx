@@ -50,7 +50,7 @@ const UserModal = ({ visible, onHide, user: _user, onSubmit }: PropTypes) => {
                     <Row>
                         <Col>
 
-                            <Form onSubmit={submitHandler}>
+                            <Form onSubmit={submitHandler} className='p-3'>
                                 <Form.Group>
                                     <Form.Label htmlFor='name' >
                                         Name
@@ -71,9 +71,7 @@ const UserModal = ({ visible, onHide, user: _user, onSubmit }: PropTypes) => {
                                     <Form.Label htmlFor='email'>
                                         Email
                                     </Form.Label>
-                                    <Form.Control type='email' id='email' name='email' required onChange={onChange} value={user.email}>
-
-                                    </Form.Control>
+                                    <Form.Control type='email' id='email' name='email' required onChange={onChange} value={user.email}/>
                                 </Form.Group>
                                 <Form.Group>
                                     <Form.Label htmlFor='phone'>

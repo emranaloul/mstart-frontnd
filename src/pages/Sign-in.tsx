@@ -19,7 +19,7 @@ export const Signin = ({signinHandler}: PropTypes) => {
     }
 
     return (
-        <Container style={{ maxHeight: '100vh', padding: '15%' }}>
+        <Container style={{ maxHeight: '100vh', padding: '5% 15%' }}>
             <Row className='justify-content-center align-items-center' style={{ border: '1px solid black', padding: '1rem', borderRadius: '1rem', backgroundColor: 'skyblue' }}>
                 <Col xs={12}><h1 style={{ margin: '3rem 0', color: '#fff' }}>Sign-in</h1></Col>
                 <Col xs={6}>

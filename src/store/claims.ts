@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ClaimType } from "../types";
+import { ClaimType, ParamsType } from "../types";
 import { AppDispatch } from ".";
 import { setToast } from "./toast";
 import Claims from "../service/Claims";
@@ -35,6 +35,19 @@ export const getClaimsDetails = () =>  async(dispatch: AppDispatch) =>{
         const {data, status, message } = await Claims.getClaimsDetails()
         if(status === 200) {
             dispatch(setClaims({detailed: data}))
+        } else dispatch(setToast({type: 'error', text: message}))
+    } catch (error) {
+        if (error instanceof Error) {
+            dispatch(setToast({ type: 'error', text: error.message }))
+        }
+    }
+}
+
+export const getClaimsHandler =  (payload : ParamsType & {user_id?: string}) =>async (dispatch:AppDispatch) => {
+    try {
+        const {data, status, message } = await Claims.getClaims(payload) 
+        if(status === 200) {
+            dispatch(setClaims(data))
         } else dispatch(setToast({type: 'error', text: message}))
     } catch (error) {
         if (error instanceof Error) {

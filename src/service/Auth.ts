@@ -39,6 +39,13 @@ class Auth extends ServiceAPI {
             return error
         }
     }
+    async logout() {
+        try {
+            return await this.post('logout')
+        } catch (error) {
+            return error
+        }
+    }
 }
 
 export default new Auth()
